@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar';
 const Landing = () => {
   return (
     <>
-    <Navbar/>
     <section class="h-auto bg-white">
         <div class="px-10 py-24 mx-auto max-w-7xl">
             <div class="w-full mx-auto text-left md:text-center">
@@ -30,7 +29,7 @@ const Landing = () => {
                       </div>
                     </div>
                     <div class="lg:w-60 w-64 h-96 overflow-hidden rounded-xl ">
-                      <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" class="" />
+                      <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" class="h-full" />
                     </div>
                     <div class="flex flex-row lg:flex-col space-x-3 space-y-6 items-center justify-center ">
                       <div class="w-32 lg:w-40 h-48 overflow-hidden rounded-xl ">
