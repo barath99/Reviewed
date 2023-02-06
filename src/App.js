@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import ElectionPoll from './components/ElectionPoll';
+import Landing from './pages/Landing';
+
+const poll = {
+  "name": "Example Poll",
+  "description": "An example poll using Tailwind CSS and React",
+  "choices": [
+    { "id": 1, "name": "Option 1", "votes": 10 },
+    { "id": 2, "name": "Option 2", "votes": 20 },
+    { "id": 3, "name": "Option 3", "votes": 30 }
+  ]
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Landing/>
+      <ElectionPoll poll={poll} />
     </div>
   );
 }
