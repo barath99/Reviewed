@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <Landing/>
-      <ElectionPoll poll={poll} />
+      {/* <ElectionPoll poll={poll} /> */}
     </div>
   );
 }
