@@ -6,9 +6,10 @@ import {
 } from "react-router-dom";
 import Landing from './pages/Landing';
 import ForumPage from "./pages/ForumPage";
-import Vote from "./pages/Vote";
+import Detailed from "./pages/Detailed";
 import Products from "./pages/Products";
 import Navbar from "./components/Navbar";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -18,10 +19,11 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Landing />}  />
           <Route exact path="/Forum" element={<ForumPage/>} />
-          <Route exact path="/Products/:deviceName" element={<Vote/>} />
+          <Route exact path="/Products/:deviceName" element={<Detailed/>} />
           <Route exact path="/Products" element={<Products/>} />
         </Routes>
       </Router>
+      <Footer/>
     </div>
   );
 }
