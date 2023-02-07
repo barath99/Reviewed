@@ -23,19 +23,19 @@ const Products = () => {
     <div class="flex grid h-full grid-cols-12 gap-10 pb-10 mt-8 sm:mt-16">
     <ProductCard 
         category="Devices"
-        title="Tablets"
+        title="tablets"
         description="Quench satisfying designs to help you stir up emotion and tell a story."
         imageUrl="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
     />
     <ProductCard 
         category="Audio"
-        title="Speakers"
+        title="speakers"
         description="A sonic wave, a sound so clear, Emanating from this little sphere."
         imageUrl="https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1165&q=80"
     />
     <ProductCard 
         category="Devices"
-        title="Laptops"
+        title="laptops"
         description="A digital canvas, a world in my lap, An endless possibility, an endless map."
         imageUrl="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
     />

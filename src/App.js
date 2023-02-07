@@ -10,7 +10,7 @@ import Detailed from "./pages/Detailed";
 import Products from "./pages/Products";
 import Navbar from "./components/Navbar";
 import Footer from './components/Footer';
-import Vocdoni from "./services/vocdoni";
+// import Vocdoni from "./services/vocdoni";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/Forum" element={<ForumPage/>} />
           <Route exact path="/Products/:deviceName" element={<Detailed/>} />
           <Route exact path="/Products" element={<Products/>} />
-          <Route exact path="/Vocdoni" element={<Vocdoni/>} />
+          {/* <Route exact path="/Vocdoni" element={<Vocdoni/>} /> */}
         </Routes>
       </Router>
       <Footer/>

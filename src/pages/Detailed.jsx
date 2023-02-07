@@ -6,9 +6,50 @@ import { AvatarGenerator } from 'random-avatar-generator';
 import Accordion from '../components/accordionThread';
 import { Orbis } from '@orbisclub/orbis-sdk';
 import productsList from '../productsList';
+import { Election, EnvOptions, VocdoniSDKClient, PlainCensus } from '@vocdoni/sdk';
+import { Web3Provider } from '@ethersproject/providers'
+import { connector as metamask, hooks as mhooks } from '../services/connectToMetamask'
 
 
-const ProductTable = ({ products }) => {
+
+
+const InitiateVocdoni = (category, productId) => {
+
+  const [provider, setProvider] = useState('');
+  const [account, setAccount] = useState('');
+
+  const [signers, setSigners] = useState([]);
+
+  const mprovider = mhooks.useProvider();
+  const isMMActive = mhooks.useIsActive();
+  const providers = {
+    metamask: mprovider,
+  };
+
+
+  console.log(category);
+  console.log(productId);
+  console.log(productsList.filter(product => product.category === category));
+  
+  const client = new VocdoniSDKClient({
+      env: EnvOptions.DEV,
+      // wallet: 0x39c03aC0193B471683Bfa2c2b65e6A2C4C7bF83c // Replace "signer" with your signer object, e.g. Metamask or Walletconnect
+      wallet: (mprovider.getSigner())
+    });
+
+  (async () => {
+    const info = await client.createAccount()
+    console.log(info) // will show account information
+  })();
+
+  
+
+}
+
+const ProductTable = ({ products, category }) => {
+
+  const currentList = products.filter(product => product.category === category);
+
   return (
     <div className="overflow-x-auto relative mb-10">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -22,7 +63,7 @@ const ProductTable = ({ products }) => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {currentList.map((product) => (
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {product.name}
@@ -43,7 +84,8 @@ const ProductTable = ({ products }) => {
               </td>
               <td class="py-4 px-6">
                   <button 
-                  type="vote" 
+                  type="vote"
+                  onClick={() => InitiateVocdoni(category, product.id)} 
                   class="text-white mt-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Vote
                   </button>
@@ -109,7 +151,9 @@ const Detailed = () => {
     curious to see how they stack up against each other, this poll is for you. So cast your vote and let 
     your voice be heard - which product will come out on top in the end?</p>
     
-    <ProductTable products={productsList}/>
+    <ProductTable products={productsList} category={pathnameValues[2]}/>
+
+    <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-3xl dark:text-white">The <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">social</mark> forum</h1>
 
     <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
         <li>
