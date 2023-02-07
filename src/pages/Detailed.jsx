@@ -5,59 +5,53 @@ import { Link, useLocation } from 'react-router-dom';
 import { AvatarGenerator } from 'random-avatar-generator';
 import Accordion from '../components/accordionThread';
 import { Orbis } from '@orbisclub/orbis-sdk';
+import productsList from '../productsList';
 
 
-const ProductTable = ({  }) => {
-    const products = [{
-        name:"abc",
-        color:"red",
-        category:"laptop",
-    },
-    {
-        name:"abc",
-        color:"red",
-        category:"laptop",
-    }]
-
-    return (
-      <div className="overflow-x-auto relative mb-10">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="py-3 px-6">Product name</th>
-              <th scope="col" className="py-3 px-6">Color</th>
-              <th scope="col" className="py-3 px-6">Category</th>
-              <th scope="col" className="py-3 px-6">Price</th>
-              <th scope="col" className="py-3 px-6">Choose</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {product.name}
-                </th>
-                <td className="py-4 px-6">{product.color}</td>
-                <td className="py-4 px-6">{product.category}</td>
-                <td className="py-4 px-6">
-                  <div className="flex items-center">
-                    <svg aria-hidden="true" className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <title>Rating star</title>
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                      </path>
-                    </svg>
-                    <p class="ml-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
-                        <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                        <a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
-                    </div>
-                </td>
-                <td class="py-4 px-6">
-                    <button type="vote" class="text-white mt-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Vote</button>
-                </td>
-            </tr>
-            ))}
-          </tbody>
-        </table>
+const ProductTable = ({ products }) => {
+  return (
+    <div className="overflow-x-auto relative mb-10">
+      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" className="py-3 px-6">Product name</th>
+            <th scope="col" className="py-3 px-6">Color</th>
+            <th scope="col" className="py-3 px-6">Category</th>
+            <th scope="col" className="py-3 px-6">Price</th>
+            <th scope="col" className="py-3 px-6">Choose</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {product.name}
+              </th>
+              <td className="py-4 px-6">{product.color}</td>
+              <td className="py-4 px-6">{product.category}</td>
+              <td className="py-4 px-6">
+                <div className="flex items-center">
+                  <svg aria-hidden="true" className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Rating star</title>
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                    </path>
+                  </svg>
+                  <p class="ml-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
+                      <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                      <a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                  </div>
+              </td>
+              <td class="py-4 px-6">
+                  <button 
+                  type="vote" 
+                  class="text-white mt-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Vote
+                  </button>
+              </td>
+          </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
 )}
 
@@ -98,8 +92,8 @@ const Detailed = () => {
     }
 
   return (
-    <>
-    <section class="text-gray-600 body-font">
+  <>
+  <section class="text-gray-600 body-font">
       
   <div class="px-10 mx-auto max-w-7xl">
     
@@ -115,7 +109,7 @@ const Detailed = () => {
     curious to see how they stack up against each other, this poll is for you. So cast your vote and let 
     your voice be heard - which product will come out on top in the end?</p>
     
-    <ProductTable/>
+    <ProductTable products={productsList}/>
 
     <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
         <li>
