@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Orbis } from '@orbisclub/orbis-sdk';
 import { Link } from 'react-router-dom'
+import { connectToCeramic } from '../services/connectToCeramic';
+
 
 
 const Navbar = () => {
@@ -14,9 +15,8 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    let orbis = new Orbis();
     const connect = async () => {
-      let res = await orbis.connect();
+      let res = await connectToCeramic();
       /** Check if connection is successful or not */
       if(res.status == 200) {
         setUser(res.did);

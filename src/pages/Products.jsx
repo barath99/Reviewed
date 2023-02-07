@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
@@ -14,7 +15,9 @@ const Products = () => {
                 <a href="#_" class="block w-full transition duration-300 ease-in-out transform bg-center bg-cover h-full hover:scale-110" style={{backgroundImage: `url('https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80')`}}></a>
                 <div class="relative z-20 w-full h-auto py-8 text-white bg-purple-500 border-t-0 border-yellow-200 px-7">
                     <a href="#_" class="inline-block text-xs font-semibold absolute top-0 -mt-3.5 rounded-full px-4 py-2 uppercase text-purple-500 bg-white">Devices</a>
-                    <h2 class="mb-5 text-5xl font-bold"><a href="#_">iPad / Tabs</a></h2>
+                    <Link to={'/products/Tablets'}>
+                    <h2 class="mb-5 text-5xl font-bold">iPad / Tabs</h2>
+                    </Link>
                     <p class="mb-2 text-lg font-normal text-purple-100 opacity-100">Quench satisfying designs to help you stir up emotion and tell a story.</p>
 
                 </div>

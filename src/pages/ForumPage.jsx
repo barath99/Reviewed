@@ -6,6 +6,8 @@ import ForumPost  from '../components/ForumPost';
 import Navbar from '../components/Navbar';
 
 const ForumPage = () => {
+  let orbis = new Orbis();
+
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,7 +17,7 @@ const ForumPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Orbis.fetchPosts({ searchTerm });
+        const response = await orbis.fetchPosts({ searchTerm });
         setPosts(response.posts);
       } catch (error) {
         setError(error);
@@ -27,7 +29,7 @@ const ForumPage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await Orbis.fetchUser();
+        const response = await orbis.fetchUser();
         setUser(response.user);
       } catch (error) {
         setError(error);
@@ -39,7 +41,7 @@ const ForumPage = () => {
   useEffect(() => {
     const subscribeToUpdates = async () => {
       try {
-        await Orbis.subscribeToUpdates();
+        await orbis.subscribeToUpdates();
         setIsSubscribed(true);
       } catch (error) {
         setError(error);
@@ -52,7 +54,7 @@ const ForumPage = () => {
 
   const handleCreatePost = async (title, body) => {
     try {
-      const response = await Orbis.createPost({ title, body });
+      const response = await orbis.createPost({ title, body });
       setPosts([...posts, response.post]);
     } catch (error) {
       setError(error);
@@ -61,7 +63,7 @@ const ForumPage = () => {
 
   const handleCreateComment = async (postId, body) => {
     try {
-      const response = await Orbis.createComment(postId, { body });
+      const response = await orbis.createComment(postId, { body });
       const updatedPosts = posts.map((post) => {
         if (post.id === postId) {
           return {
@@ -79,7 +81,7 @@ const ForumPage = () => {
 
   const handleDeletePost = async (postId) => {
     try {
-      await Orbis.deletePost(postId);
+      await orbis.deletePost(postId);
       setPosts(posts.filter((post) => post.id !== postId));
     } catch (error) {
       setError(error);
@@ -88,7 +90,7 @@ const ForumPage = () => {
 
   const handleDeleteComment = async (postId, commentId) => {
     try {
-      await Orbis.deleteComment(postId, commentId);
+      await orbis.deleteComment(postId, commentId);
       const updatedPosts = posts.map((post) => {
         if (post.id === postId) {
           return {
@@ -106,7 +108,7 @@ const ForumPage = () => {
 
 const handleFlagPost = async (postId) => {
   try {
-    await Orbis.flagPost(postId);
+    await orbis.flagPost(postId);
   } catch (error) {
     setError(error);
   }
@@ -114,7 +116,7 @@ const handleFlagPost = async (postId) => {
 
 const handleFlagComment = async (postId, commentId) => {
   try {
-    await Orbis.flagComment(postId, commentId);
+    await orbis.flagComment(postId, commentId);
   } catch (error) {
     setError(error);
   }
@@ -122,7 +124,7 @@ const handleFlagComment = async (postId, commentId) => {
 
 const handleVoteOnPost = async (postId, voteType) => {
   try {
-    await Orbis.voteOnPost(postId, voteType);
+    await orbis.voteOnPost(postId, voteType);
     const updatedPosts = posts.map((post) => {
       if (post.id === postId) {
         return {
@@ -140,7 +142,7 @@ const handleVoteOnPost = async (postId, voteType) => {
 
 const handleVoteOnComment = async (postId, commentId, voteType) => {
   try {
-    await Orbis.voteOnComment(postId, commentId, voteType);
+    await orbis.voteOnComment(postId, commentId, voteType);
     const updatedPosts = posts.map((post) => {
       if (post.id === postId) {
         return {
