@@ -9,7 +9,7 @@ import productsList from '../productsList';
 import { Election, EnvOptions, VocdoniSDKClient, PlainCensus } from '@vocdoni/sdk';
 import { Web3Provider } from '@ethersproject/providers'
 // import { connector as metamask, hooks as mhooks } from '../services/connectToMetamask'
-import krebit from "@krebitdao/reputation-passport";
+// import krebit from "@krebitdao/reputation-passport";
 
 
 const InitiateVocdoni = (category, productId) => {
@@ -106,9 +106,9 @@ const Detailed = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
-  const passport = new krebit.core.Passport();
-  passport.read("0x39c03aC0193B471683Bfa2c2b65e6A2C4C7bF83c");
-  console.log(passport);
+  // const passport = new krebit.core.Passport();
+  // passport.read("0x39c03aC0193B471683Bfa2c2b65e6A2C4C7bF83c");
+  // console.log(passport);
 
   const panels = [
     {
