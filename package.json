@@ -1,7 +1,7 @@
 {
   "name": "orbis-hack",
   "version": "0.1.0",
-  "homepage": "https://barath99.github.io/orbis-hack",
+  "homepage": "https://barath99.github.io/orbisHack",
   "private": true,
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
