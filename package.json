@@ -1,9 +1,13 @@
 {
   "name": "orbis-hack",
   "version": "0.1.0",
+  "homepage": "https://barath99.github.io/orbis-hack",
   "private": true,
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
+    "@krebitdao/eip712-vc": "^1.0.3",
+    "@krebitdao/reputation-passport": "^1.0.7",
+    "@lit-protocol/sdk-browser": "^1.1.241",
     "@orbisclub/orbis-sdk": "^0.4.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -19,10 +23,13 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
+    "siwe": "^1.1.6",
     "wagmi": "^0.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,6 +55,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "gh-pages": "^4.0.0",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4"
   }
