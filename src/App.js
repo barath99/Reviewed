@@ -18,10 +18,10 @@ function App() {
       <Router>
       <Navbar/>
         <Routes>
-          <Route exact path="/" element={<Landing />}  />
-          <Route exact path="/Forum" element={<ForumPage/>} />
-          <Route exact path="/Products/:deviceName" element={<Detailed/>} />
-          <Route exact path="/Products" element={<Products/>} />
+          <Route exact path="orbis-hack/" element={<Landing />}  />
+          <Route exact path="orbis-hack/Forum" element={<ForumPage/>} />
+          <Route exact path="orbis-hack/Products/:deviceName" element={<Detailed/>} />
+          <Route exact path="orbis-hack/Products" element={<Products/>} />
           {/* <Route exact path="/Vocdoni" element={<Vocdoni/>} /> */}
         </Routes>
       </Router>
