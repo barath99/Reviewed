@@ -5,7 +5,6 @@ import {
   Routes
 } from "react-router-dom";
 import Landing from './pages/Landing';
-import ForumPage from "./pages/ForumPage";
 import Detailed from "./pages/Detailed";
 import Products from "./pages/Products";
 import Navbar from "./components/Navbar";
@@ -19,7 +18,6 @@ function App() {
       <Navbar/>
         <Routes>
           <Route exact path="/" element={<Landing />}  />
-          <Route exact path="/Forum" element={<ForumPage/>} />
           <Route exact path="/Products/:deviceName" element={<Detailed/>} />
           <Route exact path="/Products" element={<Products/>} />
           {/* <Route exact path="/Vocdoni" element={<Vocdoni/>} /> */}

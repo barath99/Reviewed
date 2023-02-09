@@ -15,11 +15,12 @@ const Landing = () => {
   return (
     <>
     <section class="h-auto bg-white">
-        <div class="px-10 py-24 mx-auto max-w-7xl">
+        <div class="px-10 py-24 mx-auto max-w-5xl">
             <div class="w-full mx-auto text-left md:text-center">
-                <h1 class="mb-6 text-4xl font-extrabold leading-normal max-w-5xl mx-auto tracking-normal text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl md:tracking-tight"> The 
-                <span class="w-full text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline tails-selected-element"> Next-Gen </span>
-                 Technology Review <br class="lg:block hidden"/> Platform for all your gadgets. </h1>
+                {/* <h1 class="mb-6 text-4xl font-normal leading-9 max-w-5xl mx-auto tracking-wide text-blue-900 sm:text-6xl md:text-6xl lg:text-6xl md:tracking-normal"> The 
+                Next-Gen Technology Review Platform for all your gadgets. </h1> */}
+                <h1 class="mb-4 text-4xl font-semibold tracking-normal leading-none text-gray-900 md:text-5xl lg:text-5xl dark:text-white">
+                  The Next-Gen Technology Review Platform for all your gadgets.</h1>
             </div>
         </div>
         <div class="flex justify-center  ">

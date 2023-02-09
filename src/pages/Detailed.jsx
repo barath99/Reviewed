@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { AvatarGenerator } from 'random-avatar-generator';
 import Accordion from '../components/accordionThread';
 import { Orbis } from '@orbisclub/orbis-sdk';
-import productsList from '../productsList';
-import commentsList from '../commentsList';
+import productsList from '../mockdata/productsList';
+import commentsList from '../mockdata/commentsList';
 import { Election, EnvOptions, VocdoniSDKClient, PlainCensus } from '@vocdoni/sdk';
 import { Web3Provider } from '@ethersproject/providers'
 // import { connector as metamask, hooks as mhooks } from '../services/connectToMetamask'
@@ -32,8 +32,6 @@ const InitiateVocdoni = (category, productId) => {
     const info = await client.createAccount()
     console.log(info) // will show account information
   })();
-
-  
 
 }
 
@@ -90,6 +88,7 @@ const ProductTable = ({ products, category }) => {
 
 const Comment = (props) => {
   const generator = new AvatarGenerator();
+
   return(
     <li className="mb-10 ml-6">
       <span className="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
@@ -97,7 +96,7 @@ const Comment = (props) => {
       </span>
       <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-700 dark:border-gray-600">
         <div className="justify-between items-center mb-3 sm:flex">
-          <time className="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{props.timestamp}</time>
+          <time className={props.reputed=="true" ? "mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0" : "hidden"}>✅ Highly Reputed Author</time>
           <div className="text-sm font-normal text-gray-500 lex dark:text-gray-300">
             {props.authorName.substring(0, 3) + "..." + props.authorName.substring(props.authorName.length - 5)} commented on 
             <a href="#" className="font-semibold text-gray-900 dark:text-white hover:underline"> {props.linkText}</a>
@@ -120,6 +119,13 @@ const Detailed = () => {
   let orbis = new Orbis();
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    setComments(commentsList.filter(comment => comment.category === pathnameValues[2]));
+  }, [pathnameValues[2]]);
+
+  
 
   // const passport = new krebit.core.Passport();
   // passport.read("0x39c03aC0193B471683Bfa2c2b65e6A2C4C7bF83c");
@@ -174,59 +180,11 @@ const Detailed = () => {
     <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-3xl dark:text-white">The <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">social</mark> forum</h1>
 
     <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
-        {/* <li>
-            <Link href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
-                <img class="mr-3 mb-3 w-12 h-12 rounded-full sm:mb-0" src={generator.generateRandomAvatar()} alt=""/>
-                <div class="text-gray-600 dark:text-gray-400">
-                    <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white">Jese Leos</span> likes <span class="font-medium text-gray-900 dark:text-white">Bonnie Green's</span> post in <span class="font-medium text-gray-900 dark:text-white"> How to start with Flowbite library</span></div>
-                    <div class="text-sm font-normal">"I wanted to share a webinar zeroheight."</div>
-                    <span class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                        ✅ Highly Reputed Author
-                    </span> 
-                </div>
-            </Link>
-        </li>
-        <li>
-          <Link href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
-                <img class="mr-3 mb-3 w-12 h-12 rounded-full sm:mb-0" src={generator.generateRandomAvatar()} alt=""/>
-                <div class="text-gray-600 dark:text-gray-400">
-                    <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white">Jese Leos</span> likes <span class="font-medium text-gray-900 dark:text-white">Bonnie Green's</span> post in <span class="font-medium text-gray-900 dark:text-white"> How to start with Flowbite library</span></div>
-                    <div class="text-sm font-normal">"I wanted to share a webinar zeroheight."</div>
-                    <span class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                        ✅ Highly Reputed Author
-                    </span> 
-                </div>
-            </Link>
-        </li>
-        <li>
-          <Link href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
-                <img class="mr-3 mb-3 w-12 h-12 rounded-full sm:mb-0" src={generator.generateRandomAvatar()} alt=""/>
-                <div class="text-gray-600 dark:text-gray-400">
-                    <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white">Jese Leos</span> likes <span class="font-medium text-gray-900 dark:text-white">Bonnie Green's</span> post in <span class="font-medium text-gray-900 dark:text-white"> How to start with Flowbite library</span></div>
-                    <div class="text-sm font-normal">"I wanted to share a webinar zeroheight."</div>
-                    <span class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                        ✅ Highly Reputed Author
-                    </span> 
-                </div>
-            </Link>
-        </li>
-        <li>
-          <Link href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
-                <img class="mr-3 mb-3 w-12 h-12 rounded-full sm:mb-0" src={generator.generateRandomAvatar()} alt=""/>
-                <div class="text-gray-600 dark:text-gray-400">
-                    <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white">Jese Leos</span> likes <span class="font-medium text-gray-900 dark:text-white">Bonnie Green's</span> post in <span class="font-medium text-gray-900 dark:text-white"> How to start with Flowbite library</span></div>
-                    <div class="text-sm font-normal">"I wanted to share a webinar zeroheight."</div>
-                    <span class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                        ✅ Highly Reputed Author
-                    </span> 
-                </div>
-            </Link>
-        </li> */}
-        
+                
         {/* <Accordion panels={panels} /> */}
 
         <ol class="relative border-l border-gray-200 dark:border-gray-700 mx-8 py-4">                  
-        {commentsList.map((comment) => (
+        {comments.map((comment) => (
         <Comment
           avatarUrl={comment.avatarUrl}
           authorName={comment.authorName}
@@ -234,6 +192,7 @@ const Detailed = () => {
           linkText={comment.linkText}
           commentText={comment.commentText}
           key={comment.avatarUrl}
+          reputed = {comment.reputed}
         />
         ))}
         </ol>
