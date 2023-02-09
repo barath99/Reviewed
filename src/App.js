@@ -23,6 +23,7 @@ function App() {
           <Route exact path="/Products/:deviceName" element={<Detailed/>} />
           <Route exact path="/Products" element={<Products/>} />
           {/* <Route exact path="/Vocdoni" element={<Vocdoni/>} /> */}
+          <Route path="*" element={<Landing/>}/>
         </Routes>
       </Router>
       <Footer/>
