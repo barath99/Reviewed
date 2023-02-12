@@ -1,9 +1,9 @@
-import { Orbis } from '@orbisclub/orbis-sdk';
+// import { Orbis } from '@orbisclub/orbis-sdk';
 
-export const connectToCeramic = async () => {
+// export const connectToCeramic = async () => {
   
-  let orbis = new Orbis();
-  let res = await orbis.connect();
+//   let orbis = new Orbis();
+//   let res = await orbis.connect();
 
-  return res;
-}
+//   return res;
+// }

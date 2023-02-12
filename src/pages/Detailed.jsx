@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AvatarGenerator } from 'random-avatar-generator';
 import Accordion from '../components/accordionThread';
-import { Orbis } from '@orbisclub/orbis-sdk';
+// import { Orbis } from '@orbisclub/orbis-sdk';
 import productsList from '../mockdata/productsList';
 import commentsList from '../mockdata/commentsList';
-import { Election, EnvOptions, VocdoniSDKClient, PlainCensus } from '@vocdoni/sdk';
+// import { Election, EnvOptions, VocdoniSDKClient, PlainCensus } from '@vocdoni/sdk';
 import { Web3Provider } from '@ethersproject/providers'
 // import { connector as metamask, hooks as mhooks } from '../services/connectToMetamask'
 // import krebit from "@krebitdao/reputation-passport";
@@ -22,16 +22,16 @@ const InitiateVocdoni = (category, productId) => {
   console.log(productId);
   console.log(productsList.filter(product => product.category === category));
   
-  const client = new VocdoniSDKClient({
-      env: EnvOptions.DEV,
-      // wallet: 0x39c03aC0193B471683Bfa2c2b65e6A2C4C7bF83c // Replace "signer" with your signer object, e.g. Metamask or Walletconnect
-      // wallet: (mprovider.getSigner())
-    });
+  // const client = new VocdoniSDKClient({
+  //     env: EnvOptions.DEV,
+  //     // wallet: 0x39c03aC0193B471683Bfa2c2b65e6A2C4C7bF83c // Replace "signer" with your signer object, e.g. Metamask or Walletconnect
+  //     // wallet: (mprovider.getSigner())
+  //   });
 
-  (async () => {
-    const info = await client.createAccount()
-    console.log(info) // will show account information
-  })();
+  // (async () => {
+  //   const info = await client.createAccount()
+  //   console.log(info) // will show account information
+  // })();
 
 }
 
@@ -116,7 +116,7 @@ const Detailed = () => {
   const deviceName = pathnameValues[2].toUpperCase();
   const generator = new AvatarGenerator();
 
-  let orbis = new Orbis();
+  // let orbis = new Orbis();
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [comments, setComments] = useState([]);
@@ -144,18 +144,18 @@ const Detailed = () => {
     }
     ]
 
-    const handleSubmit = async event => {
-        event.preventDefault();
+    // const handleSubmit = async event => {
+    //     event.preventDefault();
        
-        // Create the new post
-        const createPostResponse = await orbis.createPost({body: message, title: subject});
-        if (createPostResponse.status !== 201) {
-          // If the post creation is unsuccessful, show an error message
-          alert('Error creating post');
-          return;
-        }
-        console.log(createPostResponse);
-    }
+    //     // Create the new post
+    //     const createPostResponse = await orbis.createPost({body: message, title: subject});
+    //     if (createPostResponse.status !== 201) {
+    //       // If the post creation is unsuccessful, show an error message
+    //       alert('Error creating post');
+    //       return;
+    //     }
+    //     console.log(createPostResponse);
+    // }
 
   return (
   <>
@@ -228,7 +228,7 @@ const Detailed = () => {
     </div> */}
 
 
-    <form className='px-4' onSubmit={handleSubmit}>   
+    <form className='px-4'>   
       {/* <label for="search" class="mt-3 text-sm font-medium text-gray-900 sr-only dark:text-white">Create Tread</label>
       <label for="topic" class="block mt-3 mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject</label>
       <div class="relative">
