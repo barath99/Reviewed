@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-import { connectToCeramic } from '../services/connectToCeramic';
-
-
 
 const Navbar = () => {
 
@@ -15,19 +12,19 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const connect = async () => {
-      let res = await connectToCeramic();
-      /** Check if connection is successful or not */
-      if(res.status == 200) {
-        setUser(res.did);
-        console.log(res)
-        setShortText(res.did.substring(0, 3) + "..." + res.did.substring(res.did.length - 5));
-      } else {
-        console.log("Error connecting to Ceramic: ", res);
-        alert("Error connecting to Ceramic.");
-      }
-    }
-    connect();
+    // const connect = async () => {
+    //   let res = await connectToCeramic();
+    //   /** Check if connection is successful or not */
+    //   if(res.status == 200) {
+    //     setUser(res.did);
+    //     console.log(res)
+    //     setShortText(res.did.substring(0, 3) + "..." + res.did.substring(res.did.length - 5));
+    //   } else {
+    //     console.log("Error connecting to Ceramic: ", res);
+    //     alert("Error connecting to Ceramic.");
+    //   }
+    // }
+    // connect();
   }, [SignInClicked]); // specify the state variable here
 
   return (
