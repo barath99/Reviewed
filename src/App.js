@@ -19,28 +19,55 @@ const onLogin = () => {
 }
 
 function App() {
+
   const auth = useAuth();
   const [contract, setContract] = useState(null);
-  
-  async function getReview1() {
-    if (contract) {
-    console.log(await contract.getReview(1));
-    console.log("here it has come...");
-  }
-  }
+  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
   useEffect(() => {
     // Get the provider object from ethers.js
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    
     // Get the signer object from the provider
     const signer = provider.getSigner();
+    
     // Get the contract address and instantiate the contract object
-    const contractAddress = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
-    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-    setContract(contract);
-  
-    getReview1();  
+    const contractTemp = new ethers.Contract(contractAddress, contractAbi, signer);
+    setContract(contractTemp); 
   }, []);
+  
+  async function getReview(reviewId) {
+    try {
+      const review = await contract.getReview(1);
+      return review;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function addReview(review) {
+    if (typeof window.ethereum !== "undefined") {
+      // ethereum is usable, get reference to the contract
+      await requestAccount();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      // signer needed for transaction that changes state
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+      // perform transaction
+      const transaction = await contract.createReview(review);
+      await transaction.wait();
+      return true;
+    } else {
+      console.error("Ethereum is not usable.");
+      return false;
+    }
+  }
+
+  async function requestAccount() {
+    await window.ethereum.request({method: 'eth_requestAccounts'});
+  }
+
+  
 
   return (
     <div className="App">
@@ -50,16 +77,11 @@ function App() {
       
         <Routes>
           <Route exact path="/" element={<><div>
-      {auth.loading ? (
-        "Loading"
-      ) : auth.isLoggedIn ? (
-        <p>Logged In</p>
-      ) : (
-        <div>
-          <Auth externalWallet={true} theme={"light"} onLogin={onLogin}/>
-        </div>
-      )}
-    </div><Landing /></>}  />
+          {auth.loading ? ("Loading") : auth.isLoggedIn ? (<p>Logged In</p>) : (
+            <div><Auth externalWallet={true} theme={"dark"} onLogin={onLogin}/></div>
+          )}
+        </div><Landing /><button onClick={()=>addReview("First Review ever...")}>Submit review</button>
+        </>}  />
           <Route exact path="/Products/:deviceName" element={<Detailed/>} />
           <Route exact path="/Products" element={<Products/>} />
           <Route path="*" element={<Landing/>}/>
