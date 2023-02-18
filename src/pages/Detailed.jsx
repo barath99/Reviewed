@@ -9,6 +9,7 @@ import commentsList from '../mockdata/commentsList';
 import { Web3Provider } from '@ethersproject/providers'
 // import { connector as metamask, hooks as mhooks } from '../services/connectToMetamask'
 // import krebit from "@krebitdao/reputation-passport";
+import { Rating } from 'react-simple-star-rating'
 
 
 const InitiateVocdoni = (category, productId) => {
@@ -38,6 +39,12 @@ const InitiateVocdoni = (category, productId) => {
 const ProductTable = ({ products, category }) => {
 
   const currentList = products.filter(product => product.category === category);
+  const [rating, setRating] = useState(0)
+  
+  const handleRating = (rate) => {
+    setRating(rate)
+  }
+
 
   return (
     <div className="overflow-x-auto relative mb-10">
@@ -50,6 +57,7 @@ const ProductTable = ({ products, category }) => {
             <th scope="col" className="py-3 px-6">Rating</th>
             <th scope="col" className="py-3 px-6">Votes</th>
             <th scope="col" className="py-3 px-6">Cast your vote</th>
+            <th scope="col" className="py-3 px-6">Rate the products</th>
           </tr>
         </thead>
         <tbody>
@@ -79,6 +87,16 @@ const ProductTable = ({ products, category }) => {
                     Vote
                   </button>
               </td>
+              <td>
+              <Rating
+                  onClick={handleRating}
+                  SVGclassName="inline-block"
+                  size={25}
+                  transition
+                  allowFraction
+                  showTooltip
+                />
+              </td>
           </tr>
           ))}
         </tbody>
@@ -91,22 +109,28 @@ const Comment = (props) => {
 
   return(
     <li className="mb-10 ml-6">
-      <span className="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-        <img className="rounded-full shadow-lg" src={generator.generateRandomAvatar(props.authorName)} alt={props.authorName} />
-      </span>
-      <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-700 dark:border-gray-600">
-        <div className="justify-between items-center mb-3 sm:flex">
+    <span className="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+      <img className="rounded-full shadow-lg" src={generator.generateRandomAvatar(props.authorName)} alt={props.authorName} />
+    </span>
+    <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-700 dark:border-gray-600">
+      <div className="justify-between items-center mb-3 sm:flex">
+        <div className="text-sm font-normal text-gray-500 lex dark:text-gray-300">
+          {props.authorName.substring(0, 3) + "..." + props.authorName.substring(props.authorName.length - 5)} commented on 
+          <a href="#" className="font-semibold text-gray-900 dark:text-white hover:underline"> {props.linkText}</a>
+          <br></br>
           <time className={props.reputed=="true" ? "mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0" : "hidden"}>✅ Highly Reputed Author</time>
-          <div className="text-sm font-normal text-gray-500 lex dark:text-gray-300">
-            {props.authorName.substring(0, 3) + "..." + props.authorName.substring(props.authorName.length - 5)} commented on 
-            <a href="#" className="font-semibold text-gray-900 dark:text-white hover:underline"> {props.linkText}</a>
-            </div>
+          </div>
+          <button 
+                type="vote"
+                class="text-white mt-3 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                Upvote this review 
+          </button>  
         </div>
-        <div className="p-3 text-sm font-normal text-gray-500 rounded-lg border-gray-200 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
-          {props.commentText}
-        </div>
+      <div className="p-3 text-sm font-normal text-gray-500 rounded-lg border-gray-200 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
+        {props.commentText}
       </div>
-    </li>
+    </div>
+  </li>
   )
 }
 
@@ -120,12 +144,14 @@ const Detailed = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [comments, setComments] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     setComments(commentsList.filter(comment => comment.category === pathnameValues[2]));
   }, [pathnameValues[2]]);
 
-  
+  const filtered = !query ? comments : comments.filter((comments) =>
+      comments.commentText.toLowerCase().includes(query.toLowerCase()));
 
   // const passport = new krebit.core.Passport();
   // passport.read("0x39c03aC0193B471683Bfa2c2b65e6A2C4C7bF83c");
@@ -182,9 +208,10 @@ const Detailed = () => {
     <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
                 
         {/* <Accordion panels={panels} /> */}
+        <textarea id="message" rows="2" value={query} onChange={event => setQuery(event.target.value)} class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by Product Name"></textarea>
 
         <ol class="relative border-l border-gray-200 dark:border-gray-700 mx-8 py-4">                  
-        {comments.map((comment) => (
+        {filtered.map((comment) => (
         <Comment
           avatarUrl={comment.avatarUrl}
           authorName={comment.authorName}
@@ -226,7 +253,7 @@ const Detailed = () => {
         </button>
       </div>  
     </div> */}
-
+    
 
     <form className='px-4'>   
       {/* <label for="search" class="mt-3 text-sm font-medium text-gray-900 sr-only dark:text-white">Create Tread</label>
