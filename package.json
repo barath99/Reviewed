@@ -1,7 +1,7 @@
 {
   "name": "orbis-hack",
   "version": "0.1.0",
-  "homepage": "https://barath99.github.io/orbis-hack/",
+  "homepage": "",
   "private": true,
   "dependencies": {
     "@arcana/auth": "^1.0.1",
@@ -16,7 +16,7 @@
     "random-avatar-generator": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.6.1",
+    "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "siwe": "^1.1.6",
     "wagmi": "^0.9.5",
