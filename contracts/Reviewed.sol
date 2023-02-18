@@ -83,10 +83,11 @@ contract Reviewed {
    function ratingForProduct(uint256 productId , uint256 rating) public {
         Product storage product = products[productId];
         
-        require(!product.voters[msg.sender], "You can only vote for a product once");
-
+        for (uint i = 0; i < product.voters.length; i++) {
+        require(product.voters[i] != msg.sender, "You can only vote for a product once");
+    }
         product.rating = (product.rating * product.voters.length + rating) / product.voters.length;
-        product.voters[msg.sender] = true;
+        product.voters.push(msg.sender);
         
         emit Vote(productId, product.rating);
      }
