@@ -5,8 +5,6 @@ import { Auth, useAuth } from "@arcana/auth-react";
 
 const Navbar = ({auth}) => {
   console.log("Loggedin? ",auth.isLoggedIn)
-  const [SignInClicked, setSignInClicked] = useState(false);
-  const [AccountId, setAccountId] = useState("");
   const [showModal, setShowModal] = useState(false);
   
   const handleSignInClick = async() => {
@@ -20,10 +18,6 @@ const Navbar = ({auth}) => {
   useEffect(() => {
     
   }, []);
-
-  useEffect(() => {
- 
-  }, [SignInClicked]); // specify the state variable here
 
   return (
     <section class="relative w-full px-8 text-gray-700 bg-white body-font">

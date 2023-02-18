@@ -21,7 +21,7 @@ function App() {
   const auth = useAuth();
   const [contract, setContract] = useState(null);
   const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-  const isSignedIn = true;
+  const isSignedIn = auth.isLoggedIn;
 
   // useEffect(() => {
   //   // Get the provider object from ethers.js
@@ -39,8 +39,8 @@ function App() {
   
   return (
     <div className="App">
-
       <Router>
+      <Navbar auth={auth}/>
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route exact 
