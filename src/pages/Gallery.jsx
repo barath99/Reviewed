@@ -134,7 +134,7 @@ const Gallery = () => {
     
     <section className="container mx-auto justify-center align-items-center">
     <div class="flex flex-col text-center w-full mb-10">
-      <h1 class="text-2xl text-indigo-500 tracking-wide font-medium mb-1">LivePeerTube - Tech Review Videos</h1>
+      <h1 class="text-2xl text-indigo-500 tracking-wide font-medium mb-1">LivepeerTube - Tech Review Videos</h1>
     </div>
 
     <ConnectButton />
