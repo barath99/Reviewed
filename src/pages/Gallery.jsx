@@ -165,7 +165,7 @@ const Gallery = () => {
     </section>
     
     
-    <div class="flex grid h-full grid-cols-6 gap-10 pb-10 mt-8 sm:mt-16">
+    <div class="grid h-full grid-cols-6 gap-10 pb-10 mt-8 sm:mt-16">
     {asset?.[0]?.playbackId && (
       <><div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2">
         <Player title={asset[0].name} playbackId={asset[0].playbackId} />
@@ -175,7 +175,6 @@ const Gallery = () => {
       <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2" key={video.id}>
         <Player
           title={video.title}
-          // playbackId="f5eese9wwl88k4g8"
           src={video.url}
           poster={video.poster}
           showPipButton
