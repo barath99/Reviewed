@@ -2,7 +2,7 @@
 
 ![image](documents/1.jpg)
 
-Reviewed is a decentralised tech gadget review platform where users can upload their reviews about various tech gadgets, upvote, participate in fan battles and watch tech videos using decentralised "Livepeer". This platform is built on the Ethereum blockchain and uses various technologies like Solidity, React, Livepeer, TailwindCSS, IPFS, Mantle, Hardhat, Arcana, Alchemy, Ether, and Chainlink.
+Reviewed is a decentralised tech gadget review platform where users can upload their reviews about various tech gadgets, upvote, participate in fan battles and watch tech videos using Livepeer. This platform is built on the Ethereum blockchain and uses Arcana authentication (also, along with an option to enables user to use other wallet too) various technologies like Solidity, React, Livepeer, TailwindCSS, IPFS, Mantle, Hardhat, Arcana, Alchemy, Ether, and Chainlink.
 
 ## Features
 
