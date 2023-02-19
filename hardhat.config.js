@@ -20,6 +20,10 @@ module.exports = {
     goerli: {
       url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
       accounts: [GOERLI_PRIVATE_KEY]
+    },
+      'Mantle-Testnet': {
+      url: 'https://rpc.testnet.mantle.xyz/',
+      accounts: [process.env.PRIV_KEY]
     }
   },
   external: {
