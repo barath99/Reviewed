@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Reviewed {
+import "@mantlejs/mantle/contracts/MantleStorage.sol";
+
+
+contract Reviewed{
     struct Review {
         uint256 reviewId;
         uint256 categoryId;
@@ -26,6 +29,8 @@ contract Reviewed {
         address[] voters;
     }
 
+
+
     mapping(uint256 => Category) private category;
     mapping(uint256 => Review) private reviews;
     uint256 private reviewCount;
@@ -36,21 +41,25 @@ contract Reviewed {
     mapping(address => uint256) private reputation;
     mapping(address => uint256) private lastLogin;
     
-    event NewReview(address author, uint256 reviewId);
+    event NewReview(address author, uint256 reviewId, uint256 tokenId);
     event Upvote(uint256 reviewId, uint256 upvotes);
     event NewProduct(uint256 productId, string name);
     event Vote(uint256 productId, uint256 votes);
+
+    address private mantleStorageAddress;
+    
     
     function createReview(string memory text , uint256 categoryId) public {
         require(bytes(text).length > 0, "Text cannot be empty");
         
         Review storage review = reviews[++reviewCount];
         review.author = msg.sender;
-        review.text = text;
+        review.text = storeText(text);
         review.upvotes = 0;
         review.categoryId = categoryId;
         review.createDate = block.timestamp;
         
+
         emit NewReview(msg.sender, reviewCount);
     }
     
@@ -94,6 +103,7 @@ contract Reviewed {
     
     function getReviews(uint256 categoryId) public view returns (Review[] memory) {
         uint256 numReviews = reviewCount;
+
         Review[] memory reviewsInCategory = new Review[](numReviews);
         uint256 reviewIdx = 0;
 
@@ -124,6 +134,27 @@ contract Reviewed {
 
     return productsInCategory;
 }
+
+ //to store text on Mantle
+  function storeText(string memory text) public returns (bytes32) {
+    
+    bytes32 key = keccak256(abi.encodePacked(text));
+
+    MantleStorage mantleStorage = MantleStorage(mantleStorageAddress);
+
+    mantleStorage.setString(key, text);
+
+    return key;
+  }
+
+  // retrieve text from Mantle
+  function getText(bytes32 key) public view returns (string memory) {
+    MantleStorage mantleStorage = MantleStorage(mantleStorageAddress);
+
+    string memory text = mantleStorage.getString(key);
+
+    return text;
+  }
 
     
     function getReputation(address user) public view returns (uint256) {
