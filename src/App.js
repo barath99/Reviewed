@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { LivepeerConfig, createReactClient, studioProvider} from '@livepeer/react';
-import { WagmiConfig, chain, createClient } from 'wagmi';
+import { WagmiConfig, chain, createClient, goerli } from 'wagmi';
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultWallets,
@@ -29,9 +29,9 @@ import Protected from "./components/Protected";
 const contractAbi = require("./artifacts/contracts/Reviewed.sol/Reviewed.json").abi;
 
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum],
+  [mainnet, polygon, optimism, arbitrum, goerli],
   [
-    alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+    alchemyProvider({ apiKey: "yvch2InBpxGATD5XhJimGwEkAm3oKqwJ" }),
     publicProvider()
   ]
 );
@@ -61,18 +61,18 @@ function App() {
   const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
   const isSignedIn = auth.isLoggedIn;
 
-  useEffect(() => {
-    // Get the provider object from ethers.js
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  // useEffect(() => {
+  //   // Get the provider object from ethers.js
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
     
-    // Get the signer object from the provider
-    const signer = provider.getSigner();
+  //   // Get the signer object from the provider
+  //   const signer = provider.getSigner();
     
-    // Get the contract address and instantiate the contract object
-    const contractTemp = new ethers.Contract(contractAddress, contractAbi, signer);
-    setContract(contractTemp); 
+  //   // Get the contract address and instantiate the contract object
+  //   const contractTemp = new ethers.Contract(contractAddress, contractAbi, signer);
+  //   setContract(contractTemp); 
     
-  }, []);
+  // }, []);
   
   
   return (
